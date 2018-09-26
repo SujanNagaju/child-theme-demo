@@ -1,0 +1,91 @@
+<?php 
+add_action('wp_enqueue_scripts', 'child_theme_enqueue_style');
+function child_theme_enqueue_style(){
+	$parent_style = 'parent-style'; //This is 'twentyseventeen-style' for the Twenty Seventeen theme.
+	wp_enqueue_style($parent_style, get_template_directory_uri() . '/style.css'); //enqueue parent style
+
+	wp_enqueue_style('bootstrap-style', get_stylesheet_directory_uri() .'/assets/css/bootstrap.min.css', array($parent_style), wp_get_theme()->get('Version'));
+
+	wp_enqueue_style('slick-style', get_stylesheet_directory_uri() .'/assets/css/slick.css', array($parent_style), wp_get_theme()->get('Version'));
+
+	wp_enqueue_style('slick-theme-style', get_stylesheet_directory_uri() .'/assets/css/slick-theme.css', array($parent_style), wp_get_theme()->get('Version'));
+
+	wp_enqueue_style('material-design-style', get_stylesheet_directory_uri() .'/assets/css/material-design-iconic-font.css', array($parent_style), wp_get_theme()->get('Version'));
+
+	wp_enqueue_style('child-style', get_stylesheet_directory_uri() . '/style.css', array($parent_style), wp_get_theme()->get('Version')); //enqueue child stylesheet
+
+
+	wp_enqueue_script('jquery');
+	wp_enqueue_script('slick-javascript', get_stylesheet_directory_uri().'/assets/js/slick.min.js', array('jquery'),'', true);
+	wp_enqueue_script('custom-javascript', get_stylesheet_directory_uri().'/assets/js/custom.js', array('jquery','slick-javascript'),'', true);
+}
+
+add_theme_support('post-thumbnails');
+
+//create custom post type vehicle in the child theme 
+require_once( get_stylesheet_directory() . '/includes/register-post-types.php');
+
+//add metabox to post type vehicle in child theme
+require_once( get_stylesheet_directory() . '/includes/metabox.php');
+
+//custom image size in child theme  
+add_action( 'after_setup_theme', 'my_child_theme_image_size', 11 );
+function my_child_theme_image_size() {
+	//remove_image_size( 'twentyseventeen-featured-image' ); 
+	add_image_size( 'twentyseventeen-featured-images', 400, 400, true);
+}
+require_once( get_stylesheet_directory(). '/includes/shortcode.php' );
+
+/*
+//funcion to add shortcode to our posts and pages 
+function form_shortcode(){
+	ob_start();
+?>
+ <form name="form1">
+	<p>
+	<label>Name</label>
+	<input type="text" name="name">
+	</p>
+	<p>
+	<label>Age</label>
+	<input type="text" name="age">
+	</p>
+	<p>
+	<input type="submit" name="send">
+	</p>
+</form> 
+<?php
+$content = ob_get_clean();
+return $content;
+}
+add_shortcode('form','form_shortcode' );
+
+*/
+require_once (get_stylesheet_directory().'/includes/customizer.php');
+/*
+add_action( 'customize_register', 'cd_customizer_settings' );
+function cd_customizer_settings( $wp_customize ) {
+	$wp_customize->add_section( 'facebook' , array(
+		'title'      => 'Facebook',
+		'priority'   => 20,
+	) );
+
+	$wp_customize->add_setting( 'custom_field' , array(
+		'default' => 'Default value',
+		'type' => 'theme_mod',
+		'sanitize_callback' => 'our_sanitize_function',
+	) );
+
+	$wp_customize->add_control( 'custom_field', array(
+		'label' => __( 'Custom text for custom field', 'placeholderfortextdomain' ),
+		'section' => 'facebook',
+		'settings' => 'custom_field',
+		'type' => 'text'
+	) );
+
+	
+}
+function our_sanitize_function( $input ) {
+    return wp_kses_post( force_balance_tags( $input ) );
+}
+*/

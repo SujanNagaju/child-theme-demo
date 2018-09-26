@@ -1,0 +1,23 @@
+/*
+  Theme Name: Twenty Seventeen Child
+  Theme URI: http://google.com
+  Description: Twenty Seventeen Child Theme
+  Auhtor: Child
+  Author URI: http://google.com
+  Template:twentyseventeen
+  Version: 1.5.1
+  License: GNU General Public License v2 or later
+  License URI :http://www.gnu.org/licenses/gpl-2.0.html
+  Tags: one-column, two-columns, right-sidebar, flexible-header, accessibility-ready, custom-colors, custom-header, custom-menu, custom-logo, editor-style, featured-images, footer-widgets, post-formats, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready
+  Text Domain: twenty-seventeen-child
+ */
+
+.site-content-contain {
+  background-color: #C9C8C8;
+  position: relative;
+}
+.zmdi{
+  font-size: 30px;
+  margin-right: 10px;
+}
+.grid-item { width: 30%; margin-right: 10px; margin-top:50px; }
